@@ -11,7 +11,7 @@ public class JdbcAccountDAO implements AccountDAO {
     private static JdbcTemplate jdbcTemplate;
     private BigDecimal balance;
 
-    public void JdbcUserDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
+    public void JdbcAccountDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
     @Override
     public Account get(int id) {

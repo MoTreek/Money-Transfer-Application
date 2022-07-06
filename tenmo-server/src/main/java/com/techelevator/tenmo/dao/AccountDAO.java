@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AccountDAO {
 
-    Account get(int id);
+    Account get(int user_id);
 
     List<Account> list();
 
