@@ -12,6 +12,7 @@ public interface AccountDAO {
 
     List<Account> listAll();
 
-    Account updateAccount(Account account, Long id) throws AccountNotFoundException;
+    //Updates an account
+    Account updateAccount(Account account);
 }
 

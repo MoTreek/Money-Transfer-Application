@@ -3,24 +3,24 @@ package com.techelevator.tenmo.model;
 import java.math.BigDecimal;
 
 public class Account {
-    private Long id;
+    private Long accountId;
     private BigDecimal balance;
     private int user_id;
 
     public Account(){};
 
-    public Account(Long id, int user_id, BigDecimal balance) {
-        this.id = id;
+    public Account(Long accountId, int user_id, BigDecimal balance) {
+        this.accountId = accountId;
         this.balance = balance;
         this.user_id = user_id;
     }
 
-    public Long getId() {
-        return id;
+    public Long getAccountId() {
+        return accountId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     public BigDecimal getBalance() {
