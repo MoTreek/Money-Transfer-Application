@@ -53,7 +53,7 @@ public class JdbcAccountDAO implements AccountDAO {
     @Override
     public List<Account> listAll() {
         List<Account> accounts = new ArrayList<>();
-        String sql = "SELECT account_id FROM account;";
+        String sql = "SELECT * FROM account;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
             Account account = mapRowToAccount(results);
@@ -76,7 +76,7 @@ public class JdbcAccountDAO implements AccountDAO {
 
     private Account mapRowToAccount(SqlRowSet rs) {
         Account account = new Account();
-        account.setAccountID(rs.getLong("account_id"));
+        account.setAccountID(rs.getInt("account_id"));
         account.setUser_ID(rs.getInt("user_id"));
         account.setBalance(rs.getBigDecimal("balance"));
         return account;
