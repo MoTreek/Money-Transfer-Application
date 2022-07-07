@@ -13,20 +13,19 @@ import java.util.List;
 @Component
 public class JdbcAccountDAO implements AccountDAO {
 
-    private static JdbcTemplate jdbcTemplate;
+    private  JdbcTemplate jdbcTemplate;
     private BigDecimal balance;
 
-    public void JdbcAccountDao(JdbcTemplate jdbcTemplate) {
+    public JdbcAccountDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-
     //fix to make get
     @Override
-    public Account getAccountByUserID(int userID) {
+    public Account getAccountByUserID(int id) {
         Account account = null;
-        String sql = "SELECT * FROM account WHERE user_id = ?;";
-        SqlRowSet sqlRowSet = jdbcTemplate.queryForRowSet(sql, userID);
+        String sql = "SELECT account_id, user_id, balance FROM account WHERE user_id = ?";
+        SqlRowSet sqlRowSet = jdbcTemplate.queryForRowSet(sql, id);
         while (sqlRowSet.next()) {
             account = mapRowToAccount(sqlRowSet);
 
@@ -53,7 +52,7 @@ public class JdbcAccountDAO implements AccountDAO {
     @Override
     public List<Account> listAll() {
         List<Account> accounts = new ArrayList<>();
-        String sql = "SELECT * FROM account;";
+        String sql = "SELECT account_id,  user_id, balance FROM account";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
             Account account = mapRowToAccount(results);
@@ -74,11 +73,12 @@ public class JdbcAccountDAO implements AccountDAO {
     }
 
 
-    private Account mapRowToAccount(SqlRowSet rs) {
+    public Account mapRowToAccount(SqlRowSet rs) {
         Account account = new Account();
         account.setAccountID(rs.getInt("account_id"));
         account.setUser_ID(rs.getInt("user_id"));
         account.setBalance(rs.getBigDecimal("balance"));
+
         return account;
     }
 
