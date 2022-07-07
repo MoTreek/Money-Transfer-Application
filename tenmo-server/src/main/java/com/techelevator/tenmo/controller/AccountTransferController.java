@@ -25,7 +25,7 @@ public class AccountTransferController {
     //Get Account balance with accountID
 
     //Get Account object associated with userID
-    @RequestMapping(path = "/accounts/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/account/{id}", method = RequestMethod.GET)
     public Account get(@PathVariable int userID) {
         return accountDAO.getAccountByUserID(userID);
     }
@@ -39,7 +39,7 @@ public class AccountTransferController {
     //Update Account associated with accountID
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path ="/accounts/{id}", method = RequestMethod.PUT)
-    public boolean updateAccount(@RequestBody Account account, @PathVariable Long accountID) throws AccountNotFoundException {
+    public boolean updateAccount(@RequestBody Account account, @PathVariable int accountID) throws AccountNotFoundException {
 
         boolean success = false;
         try{
