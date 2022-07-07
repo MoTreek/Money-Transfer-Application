@@ -5,10 +5,7 @@ import com.techelevator.tenmo.dao.TransferDAO;
 import com.techelevator.tenmo.dao.UserDao;
 import com.techelevator.tenmo.model.Account;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.security.PermitAll;
 import javax.security.auth.login.AccountNotFoundException;
 import java.util.List;
 
@@ -28,7 +25,7 @@ public class AccountTransferController {
     //Get Account balance with accountID
 
     //Get Account object associated with userID
-    @RequestMapping(path = "/accounts/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "/account/{id}", method = RequestMethod.GET)
     public Account get(@PathVariable int id) {
         return accountDAO.getAccountByUserID(id);
     }
@@ -40,6 +37,7 @@ public class AccountTransferController {
     }
 
     //Update Account associated with accountID
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path ="/accounts/{id}", method = RequestMethod.PUT)
     public boolean updateAccount(@RequestBody Account account, @PathVariable int accountID) throws AccountNotFoundException {
 
