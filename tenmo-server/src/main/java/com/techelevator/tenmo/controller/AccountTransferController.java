@@ -2,6 +2,7 @@ package com.techelevator.tenmo.controller;
 
 import com.techelevator.tenmo.dao.AccountDAO;
 import com.techelevator.tenmo.dao.TransferDAO;
+import com.techelevator.tenmo.dao.UserDao;
 import com.techelevator.tenmo.model.Account;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,17 +13,21 @@ import java.util.List;
 public class AccountTransferController {
     private AccountDAO accountDAO;
     private TransferDAO transferDAO;
+    private UserDao userDao;
 
-    public AccountTransferController(AccountDAO accountDAO, TransferDAO transferDAO) {
+    public AccountTransferController(AccountDAO accountDAO, TransferDAO transferDAO, UserDao userDao) {
         this.accountDAO = accountDAO;
         this.transferDAO = transferDAO;
+        this.userDao = userDao;
     }
     //ACCOUNT METHODS
 
-    //Get Account object associated with accountID
+    //Get Account balance with accountID
+
+    //Get Account object associated with userID
     @RequestMapping(path = "/accounts/{id}", method = RequestMethod.GET)
-    public Account get(@PathVariable Long accountID) {
-        return accountDAO.getAccountByAccountID(accountID);
+    public Account get(@PathVariable int userID) {
+        return accountDAO.getAccountByUserID(userID);
     }
 
     //List of all Accounts

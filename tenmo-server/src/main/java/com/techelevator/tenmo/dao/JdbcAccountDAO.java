@@ -20,22 +20,24 @@ public class JdbcAccountDAO implements AccountDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+
+    //fix to make get
     @Override
-    public Account getAccountByAccountID(Long accountID) {
-        String sql = "SELECT account_id FROM account WHERE account_id ILIKE ?;";
-        Account account = jdbcTemplate.queryForObject(sql, Account.class, accountID);
-        if (accountID != null) {
-            return account;
-        } else {
-            System.out.println("Account does not exist.");
-            return null;
+    public Account getAccountByUserID(int userID) {
+        Account account = null;
+        String sql = "SELECT * FROM account WHERE user_id = ?;";
+        SqlRowSet sqlRowSet = jdbcTemplate.queryForRowSet(sql, userID);
+        while (sqlRowSet.next()) {
+            account = mapRowToAccount(sqlRowSet);
+
         }
+        return account;
     }
 
     //List account IDs associated with a given userID (Checked)
     //Should this be made to return a list? Couldn't one user_id have more than one account_id
     //Have not made matching AccountTransferController method yet
-    @Override
+    /*@Override
     public int getAccountIDByUserID(Integer userID) {
         String sql = "SELECT account_id FROM account WHERE user_id ILIKE ?;";
         Integer id = jdbcTemplate.queryForObject(sql, Integer.class, userID);
@@ -45,7 +47,7 @@ public class JdbcAccountDAO implements AccountDAO {
             System.out.println("Account does not exist.");
             return -1;
         }
-    }
+    }*/
 
     //List all account IDs (Checked)
     @Override
@@ -70,7 +72,6 @@ public class JdbcAccountDAO implements AccountDAO {
 
         return result;
     }
-
 
 
     private Account mapRowToAccount(SqlRowSet rs) {

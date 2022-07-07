@@ -8,11 +8,9 @@ import java.util.List;
 
 public interface AccountDAO {
 
-    int getAccountIDByUserID(Integer user_id);
-    public Account getAccountByAccountID(Long accountID);
+    public Account getAccountByUserID(int userID);
     List<Account> listAll();
-
-    //Updates an account
     Account updateAccount(Account account);
+
 }
 
