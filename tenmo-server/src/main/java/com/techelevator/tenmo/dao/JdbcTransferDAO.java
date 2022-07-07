@@ -39,8 +39,6 @@ public class JdbcTransferDAO implements TransferDAO {
     Transfer transfers = new Transfer();
 
 
-    //Todo
-    //(Updated: Check SQL Statement)
     @Override
     public List<Transfer> getListTransfersByUserID(Integer userID) {
         List<Transfer> transfers = new ArrayList<>();
@@ -85,23 +83,22 @@ public class JdbcTransferDAO implements TransferDAO {
     }
 
     //This is wrong, brain was melting, can we do a join on an update method? Reminder to review update method Data Access and DAO lecture
-   @Override
+    @Override
     public Transfer updateTransferStatusID(Transfer transfer) {
         Transfer updatedTransfer = new Transfer();
-        String sql =    "UPDATE transfer " +
-                        "SET transfer_status_id = ? " +
-                        "WHERE transfer_id = ?;";
+        String sql = "UPDATE transfer " +
+                "SET transfer_status_id = ? " +
+                "WHERE transfer_id = ?;";
         jdbcTemplate.update(sql, transfer.getTransferId(), transfer.getAccountFrom(),
-              transfer.getTransferStatus(), transfer.getAccountFrom(), transfer.getAccountTo(), transfer.getAccountFrom(), transfer.getAmount());
-       // jdbcTemplate.update(sql, transfer.getTransferStatus());
+                transfer.getTransferStatus(), transfer.getAccountFrom(), transfer.getAccountTo(), transfer.getAccountFrom(), transfer.getAmount());
         return updatedTransfer;
     }
 
     @Override
-    public Transfer createProject(Transfer newTransfer) {
+    public Transfer createTransfer(Transfer newTransfer) {
         String sql = "INSERT INTO transfer (transfer_type_id, transfer_status_id, account_from, account_to, amount) VALUES (?, ?, ?, ?, ?) RETURNING transfer_id;";
         Integer newId = jdbcTemplate.queryForObject(sql, Integer.class,
-                newTransfer.getTransferTypeId(), newTransfer.getTransferStatus() ,newTransfer.getAccountFrom(), newTransfer.getAccountTo(), newTransfer.getAmount());
+                newTransfer.getTransferTypeId(), newTransfer.getTransferStatus(), newTransfer.getAccountFrom(), newTransfer.getAccountTo(), newTransfer.getAmount());
         return getTransferByTransferID(newId);
     }
 
@@ -117,8 +114,6 @@ public class JdbcTransferDAO implements TransferDAO {
         transfer.setAmount(rs.getBigDecimal("amount"));
         return transfer;
     }
-
-
 
 
 }

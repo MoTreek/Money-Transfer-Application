@@ -21,10 +21,10 @@ public class JdbcAccountDAO implements AccountDAO {
     }
 
     @Override
-    public Account getAccountByUserID(Integer userID) {
-        String sql = "SELECT account_id FROM account WHERE user_id ILIKE ?;";
-        Account account = jdbcTemplate.queryForObject(sql, Account.class, userID);
-        if (userID != null) {
+    public Account getAccountByAccountID(Long accountID) {
+        String sql = "SELECT account_id FROM account WHERE account_id ILIKE ?;";
+        Account account = jdbcTemplate.queryForObject(sql, Account.class, accountID);
+        if (accountID != null) {
             return account;
         } else {
             System.out.println("Account does not exist.");
@@ -33,6 +33,8 @@ public class JdbcAccountDAO implements AccountDAO {
     }
 
     //List account IDs associated with a given userID (Checked)
+    //Should this be made to return a list? Couldn't one user_id have more than one account_id
+    //Have not made matching AccountTransferController method yet
     @Override
     public int getAccountIDByUserID(Integer userID) {
         String sql = "SELECT account_id FROM account WHERE user_id ILIKE ?;";
