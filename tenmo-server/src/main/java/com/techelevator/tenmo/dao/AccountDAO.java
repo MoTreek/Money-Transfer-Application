@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface AccountDAO {
 
-    Account getAccountByAccountID(Integer user_id);
+    int getAccountIDByUserID(Integer user_id);
 
     List<Account> listAll();
 

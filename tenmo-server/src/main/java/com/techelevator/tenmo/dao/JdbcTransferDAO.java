@@ -17,9 +17,7 @@ public class JdbcTransferDAO implements TransferDAO {
 
     //TODO
 
-    //Find All transfers (FINISH)
-
-    //Find individual transfer by Transfer_ID
+    //Find All transfers (FINISH) Is finding all transfers by account_id sufficient?
 
     //Add or Create Transfer
 
@@ -28,8 +26,11 @@ public class JdbcTransferDAO implements TransferDAO {
     //Set status
 
 
-private static JdbcTemplate jdbcTemplate;
-public void JdbcTransferDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
+    private static JdbcTemplate jdbcTemplate;
+
+    public void JdbcTransferDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
 //    public List<Transfer> listAll(){
 //    return List<Transfer> transfers;
@@ -39,13 +40,21 @@ public void JdbcTransferDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbc
 
 
     //Todo Figure out how to get the join to work to get the account from/to actual username
+    //(Updated: Check SQL Statement)
     @Override
-    public List<Transfer> listAll() {
+    public List<Transfer> getListTransfersByUserID(Integer userID) {
         List<Transfer> transfers = new ArrayList<>();
-        String sql = "SELECT transfer.transfer_id" +
-                " account_from, account_to" +
-                " transfer.amount  FROM transfer;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        String sql = "SELECT  transfer.account_from, \n" +
+                "        transfer.account_to,\n" +
+                "        account.balance,\n" +
+                "        tenmo_user.username\n" +
+                "FROM transfer\n" +
+                "JOIN account\n" +
+                "    ON transfer.account_from = account.account_id\n" +
+                "JOIN tenmo_user\n" +
+                "    ON account.user_id = tenmo_user.user_id" +
+                "WHERE tenmo_user.user_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userID);
         while (results.next()) {
             Transfer transfer = mapRowToTransfer(results);
             transfers.add(transfer);
@@ -53,13 +62,21 @@ public void JdbcTransferDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbc
         return transfers;
     }
 
+    //(Updated: Check SQL Statement)
     @Override
-    public Transfer getTransferById(Integer transferId) {
-        String sql = "SELECT transfer.transfer_id" +
-                " account_from, account_to, transfer_type, transfer_status " +
-                " transfer.amount  FROM transfer WHERE transfer_id = ?;";
-        Transfer transfer = jdbcTemplate.queryForObject(sql, Transfer.class, transferId);
-        if (transferId != null) {
+    public Transfer getTransferByTransferID(Integer transferID) {
+        String sql = "SELECT  transfer.account_from, \n" +
+                "        transfer.account_to,\n" +
+                "        account.balance,\n" +
+                "        tenmo_user.username\n" +
+                "FROM transfer\n" +
+                "JOIN account\n" +
+                "    ON transfer.account_from = account.account_id\n" +
+                "JOIN tenmo_user\n" +
+                "    ON account.user_id = tenmo_user.user_id\n" +
+                "WHERE transfer.transfer_id = ?;";
+        Transfer transfer = jdbcTemplate.queryForObject(sql, Transfer.class, transferID);
+        if (transferID != null) {
             return transfer;
         } else {
             System.out.println("Account does not exist.");
@@ -67,8 +84,9 @@ public void JdbcTransferDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbc
         }
     }
 
+    //??!?!?!?!?!
     @Override
-    public Transfer create(Transfer transfer, int transferId) {
+    public Transfer create(Transfer transfer, int transferID) {
         transfer.setTransferId(getMaxIdPlusOne());
 //        ???????????????????????????????????????????
         return transfer;
@@ -84,12 +102,13 @@ public void JdbcTransferDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbc
         }
         return maxID;
     }
+
     private int getMaxIdPlusOne() {
         return getMaxID() + 1;
     }
 
 
-
+    //Check to see if sufficient for new sql statements
     private Transfer mapRowToTransfer(SqlRowSet rs) {
         Transfer transfer = new Transfer();
         transfer.setTransferId(rs.getInt("transfer_id"));

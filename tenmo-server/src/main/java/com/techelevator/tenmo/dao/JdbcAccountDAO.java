@@ -20,20 +20,20 @@ public class JdbcAccountDAO implements AccountDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    //List account IDs associated with a given userID
+    //List account IDs associated with a given userID (Checked)
     @Override
-    public Account getAccountByAccountID(Integer id) {
+    public int getAccountIDByUserID(Integer userID) {
         String sql = "SELECT account_id FROM account WHERE user_id ILIKE ?;";
-        Account account = jdbcTemplate.queryForObject(sql, Account.class, id);
+        Integer id = jdbcTemplate.queryForObject(sql, Integer.class, userID);
         if (id != null) {
-            return account;
+            return id;
         } else {
             System.out.println("Account does not exist.");
-            return null;
+            return -1;
         }
     }
 
-    //List all account IDs
+    //List all account IDs (Checked)
     @Override
     public List<Account> listAll() {
         List<Account> accounts = new ArrayList<>();
