@@ -84,6 +84,15 @@ public class JdbcTransferDAO implements TransferDAO {
         }
     }
 
+    //This is wrong, brain was melting, can we do a join on an update method?
+  /*  @Override
+    public void updateTransferStatusID(Transfer transfer) {
+        String sql =    "UPDATE transfer " + 
+                        "SET transfer_status_id = ? " +
+                        "WHERE transfer_status_id = ?;";
+        jdbcTemplate.update(sql, transfer.gettransfer)
+    }*/
+
     //??!?!?!?!?!
     @Override
     public Transfer create(Transfer transfer, int transferID) {

@@ -9,5 +9,5 @@ public interface TransferDAO {
     List<Transfer> getListTransfersByUserID(Integer userID);
 
     Transfer getTransferByTransferID(Integer transferID);
-
+    void updateTransferStatusID(Transfer transfer);
 }
