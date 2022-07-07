@@ -52,7 +52,7 @@ public class JdbcAccountDAO implements AccountDAO {
         Account result = account;
         String sql = "UPDATE account " +
                 "SET balance = ? WHERE account_id = ?";
-        jdbcTemplate.update(sql, account.getBalance(), account.getAccountId());
+        jdbcTemplate.update(sql, account.getBalance(), account.getAccountID());
 
         return result;
     }
@@ -61,8 +61,8 @@ public class JdbcAccountDAO implements AccountDAO {
 
     private Account mapRowToAccount(SqlRowSet rs) {
         Account account = new Account();
-        account.setAccountId(rs.getLong("account_id"));
-        account.setUser_id(rs.getInt("user_id"));
+        account.setAccountID(rs.getLong("account_id"));
+        account.setUser_ID(rs.getInt("user_id"));
         account.setBalance(rs.getBigDecimal("balance"));
         return account;
     }
