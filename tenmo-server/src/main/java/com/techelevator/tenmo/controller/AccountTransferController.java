@@ -23,13 +23,17 @@ public class AccountTransferController {
     }
     //ACCOUNT METHODS
 
-    //Get Account balance with userID (Returns balance on postman)
+    //(Returns balance on postman)
+    //@param id is user_id of the user
+    //@return all balance info for a given account
     @RequestMapping(path = "/account/balance/{id}", method = RequestMethod.GET)
     public BigDecimal getAccountBalanceByUserID(@PathVariable int id) {
         return accountDAO.getAccountBalanceByUserID(id);
     }
 
-    //Get Account object associated with userID (Returns account_id, balance and user_id on postman)
+    //(Returns account_id, balance and user_id on postman)
+    //@param id is user_id of the user
+    //@return all account info for a given account
     @RequestMapping(path = "/account/{id}", method = RequestMethod.GET)
     public Account getAccountByUserID(@PathVariable int id) {
         return accountDAO.getAccountByUserID(id);
@@ -42,9 +46,10 @@ public class AccountTransferController {
     }
 
     //Update Account associated with accountID (Not able to test successfully yet, lookup how to format a put in postman)
+    //@param id is user_id of the user
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path ="/accounts/{id}", method = RequestMethod.PUT)
-    public boolean updateAccount(@RequestBody Account account, @PathVariable int accountID) throws AccountNotFoundException {
+    public boolean updateAccount(@RequestBody Account account, @PathVariable int id) throws AccountNotFoundException {
 
         boolean success = false;
         try{
