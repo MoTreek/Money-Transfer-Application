@@ -28,9 +28,10 @@ public class JdbcTransferDAO implements TransferDAO {
     private  JdbcTemplate jdbcTemplate;
     private BigDecimal bigDecimal;
 
-    public void JdbcTransferDao(JdbcTemplate jdbcTemplate) {
+    public JdbcTransferDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
 
 //    public List<Transfer> listAll(){
 //    return List<Transfer> transfers;
@@ -61,49 +62,62 @@ public class JdbcTransferDAO implements TransferDAO {
     }
 
     //(Updated: Check SQL Statement)
+    //Do not use the query for object use query for Rowset
     @Override
-    public Transfer getTransferByTransferID(Integer transferID) {
+    public Transfer getTransferDetailsByTransferID(Integer transferID) {
         String sql = "SELECT  transfer.account_from, \n" +
                 "        transfer.account_to,\n" +
-                "        account.balance,\n" +
-                "        tenmo_user.username\n" +
+                "        transfer.amount,\n" +
+                "        transfer.transfer_id,\n" +
+                "        transfer.transfer_status_id,\n" +
+                "        transfer.transfer_type_id\n" +
                 "FROM transfer\n" +
                 "JOIN account\n" +
                 "    ON transfer.account_from = account.account_id\n" +
                 "JOIN tenmo_user\n" +
                 "    ON account.user_id = tenmo_user.user_id\n" +
                 "WHERE transfer.transfer_id = ?;";
-        Transfer transfer = jdbcTemplate.queryForObject(sql, Transfer.class, transferID);
-        if (transferID != null) {
-            return transfer;
-        } else {
-            System.out.println("Account does not exist.");
-            return null;
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, transferID);
+//        if (transferID != null) {
+//            return transfer;
+//        } else {
+//            System.out.println("Account does not exist.");
+//            return null;
+//        }
+
+        Transfer newTransfer = null;
+        if (rowSet.next()) {
+            int transferId = rowSet.getInt("transfer_id");
+            int transferAccountFrom = rowSet.getInt("account_from");
+            int transferAccountTo = rowSet.getInt("account_to");
+            int transferTypeID = rowSet.getInt("transfer_type_id");
+            int transferStatusID = rowSet.getInt("transfer_status_id");
+            BigDecimal transferBalance = rowSet.getBigDecimal("amount");
+            newTransfer = new Transfer(transferId,transferTypeID ,transferStatusID, transferAccountFrom, transferAccountTo, transferBalance);
         }
+
+        return newTransfer;
+
     }
 
     @Override
     public Transfer updateTransferStatusID(Transfer transfer) {
-        return null;
-    }
+
 //This is wrong, brain was melting, can we do a join on an update method? Reminder to review update method Data Access and DAO lecture
-    //@Override
-    /*public Transfer updateTransferStatusID(Transfer transfer) {
         Transfer updatedTransfer = new Transfer();
         String sql = "UPDATE transfer " +
                 "SET transfer_status_id = ? " +
                 "WHERE transfer_id = ?;";
-        jdbcTemplate.update(sql,Transfer.class, transfer.getTransfer_status_id(), transfer.getTransfer_id());
-             //   transfer.getTransfer_status_id(), transfer.getAccount_from(), transfer.getAccount_to(), transfer.getAccount_from(), transfer.getAmount();
+        jdbcTemplate.update(sql,Transfer.class, transfer.getTransfer_id(), transfer.getTransfer_type_id(), transfer.getTransfer_status_id(), transfer.getAccount_from(), transfer.getAccount_to(), transfer.getAmount());
         return updatedTransfer;
-    }*/
+    }
 
     @Override
     public Transfer createTransfer(Transfer newTransfer) {
         String sql = "INSERT INTO transfer (transfer_type_id, transfer_status_id, account_from, account_to, amount) VALUES (?, ?, ?, ?, ?) RETURNING transfer_id;";
         Integer newId = jdbcTemplate.queryForObject(sql, Integer.class,
                 newTransfer.getTransfer_type_id(), newTransfer.getTransfer_status_id(), newTransfer.getAccount_from(), newTransfer.getAccount_to(), newTransfer.getAmount());
-        return getTransferByTransferID(newId);
+        return getTransferDetailsByTransferID(newId);
     }
 
 

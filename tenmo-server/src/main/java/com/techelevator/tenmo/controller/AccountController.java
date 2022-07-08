@@ -11,12 +11,12 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-public class AccountTransferController {
+public class AccountController {
     private AccountDAO accountDAO;
     private TransferDAO transferDAO;
     private UserDao userDao;
 
-    public AccountTransferController(AccountDAO accountDAO, TransferDAO transferDAO, UserDao userDao) {
+    public AccountController(AccountDAO accountDAO, TransferDAO transferDAO, UserDao userDao) {
         this.accountDAO = accountDAO;
         this.transferDAO = transferDAO;
         this.userDao = userDao;
