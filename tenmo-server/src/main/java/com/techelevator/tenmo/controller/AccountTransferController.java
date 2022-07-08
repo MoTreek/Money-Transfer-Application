@@ -42,7 +42,7 @@ public class AccountTransferController {
     //List of all Accounts (Returns array of account objects on postman)
     @RequestMapping(path = "/accounts", method = RequestMethod.GET)
     public List<Account> listAccounts() {
-        return accountDAO.listAll();
+        return accountDAO.getAllAccounts();
     }
 
     //Update Account associated with accountID (Not able to test successfully yet, lookup how to format a put in postman)
