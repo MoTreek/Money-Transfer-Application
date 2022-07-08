@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface TransferDAO {
 
-    List<Transfer> getListTransfersByUserID(Integer userID);
-    Transfer getTransferDetailsByTransferID(Integer transferID);
+    List<Transfer> getListTransfers(Integer userID);
+    Transfer getTransfer(Integer transferID);
     Transfer updateTransferStatusID(Transfer transfer);
     Transfer createTransfer(Transfer newTransfer);
 }

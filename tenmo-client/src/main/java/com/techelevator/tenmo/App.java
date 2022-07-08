@@ -2,9 +2,7 @@ package com.techelevator.tenmo;
 
 import com.techelevator.tenmo.model.AuthenticatedUser;
 import com.techelevator.tenmo.model.UserCredentials;
-import com.techelevator.tenmo.services.AuthenticationService;
-import com.techelevator.tenmo.services.ConsoleService;
-import com.techelevator.tenmo.services.UserService;
+import com.techelevator.tenmo.services.*;
 
 public class App {
 
@@ -13,6 +11,8 @@ public class App {
     private final ConsoleService consoleService = new ConsoleService();
     private final AuthenticationService authenticationService = new AuthenticationService(API_BASE_URL);
     private final UserService userService = new UserService();
+    private final TransferService transferService = new TransferService();
+    private final AccountService accountService = new AccountService();
 
     private AuthenticatedUser currentUser;
 

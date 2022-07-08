@@ -20,15 +20,18 @@ public class TransferController {
         this.userDao = userDao;
     }
 
-    @RequestMapping(path = "/transfers/{id}", method = RequestMethod.GET)
-    public List<Transfer> getListTransfersByUserID(@PathVariable int id){
-        return transferDAO.getListTransfersByUserID(id);
+    //This one works!
+    @RequestMapping(path = "/transfers/{accountID}", method = RequestMethod.GET)
+    public List<Transfer> getListTransfersByAccountID(@PathVariable int accountID){
+        return transferDAO.getListTransfers(accountID);
     }
 
+    //This one works!
     @RequestMapping(path = "/transfer/{transferID}", method = RequestMethod.GET)
     public Transfer getTransferByTransferID(@PathVariable int transferID){
-        return transferDAO.getTransferDetailsByTransferID(transferID);
+        return transferDAO.getTransfer(transferID);
     }
+
 
     @RequestMapping(path = "/transfers/{transferID}", method = RequestMethod.PUT)
     public boolean updateTransferStatus(@RequestBody Transfer transfer, @PathVariable int transferID){
@@ -40,6 +43,7 @@ public class TransferController {
             return success;
 
     }
+
 
     @RequestMapping(path = "/transfers/", method = RequestMethod.POST)
     public Transfer createTransfer(@RequestBody Transfer transfer){
