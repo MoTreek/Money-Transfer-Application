@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +13,6 @@ import java.util.List;
 public class JdbcTransferDAO implements TransferDAO {
 
     //View pending transfer and status
-
-
-//Transfer method take 2 accounts as objects, transfer from account and another as parameters
-//third parameter as amount.
 
     //TODO
 
@@ -28,7 +25,8 @@ public class JdbcTransferDAO implements TransferDAO {
     //Set status
 
 
-    private static JdbcTemplate jdbcTemplate;
+    private  JdbcTemplate jdbcTemplate;
+    private BigDecimal bigDecimal;
 
     public void JdbcTransferDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -84,23 +82,27 @@ public class JdbcTransferDAO implements TransferDAO {
         }
     }
 
-    //This is wrong, brain was melting, can we do a join on an update method? Reminder to review update method Data Access and DAO lecture
     @Override
     public Transfer updateTransferStatusID(Transfer transfer) {
+        return null;
+    }
+//This is wrong, brain was melting, can we do a join on an update method? Reminder to review update method Data Access and DAO lecture
+    //@Override
+    /*public Transfer updateTransferStatusID(Transfer transfer) {
         Transfer updatedTransfer = new Transfer();
         String sql = "UPDATE transfer " +
                 "SET transfer_status_id = ? " +
                 "WHERE transfer_id = ?;";
-        jdbcTemplate.update(sql, transfer.getTransferId(), transfer.getAccountFrom(),
-                transfer.getTransferStatus(), transfer.getAccountFrom(), transfer.getAccountTo(), transfer.getAccountFrom(), transfer.getAmount());
+        jdbcTemplate.update(sql,Transfer.class, transfer.getTransfer_status_id(), transfer.getTransfer_id());
+             //   transfer.getTransfer_status_id(), transfer.getAccount_from(), transfer.getAccount_to(), transfer.getAccount_from(), transfer.getAmount();
         return updatedTransfer;
-    }
+    }*/
 
     @Override
     public Transfer createTransfer(Transfer newTransfer) {
         String sql = "INSERT INTO transfer (transfer_type_id, transfer_status_id, account_from, account_to, amount) VALUES (?, ?, ?, ?, ?) RETURNING transfer_id;";
         Integer newId = jdbcTemplate.queryForObject(sql, Integer.class,
-                newTransfer.getTransferTypeId(), newTransfer.getTransferStatus(), newTransfer.getAccountFrom(), newTransfer.getAccountTo(), newTransfer.getAmount());
+                newTransfer.getTransfer_type_id(), newTransfer.getTransfer_status_id(), newTransfer.getAccount_from(), newTransfer.getAccount_to(), newTransfer.getAmount());
         return getTransferByTransferID(newId);
     }
 
@@ -108,11 +110,11 @@ public class JdbcTransferDAO implements TransferDAO {
     //Check to see if sufficient for new sql statements
     private Transfer mapRowToTransfer(SqlRowSet rs) {
         Transfer transfer = new Transfer();
-        transfer.setTransferId(rs.getInt("transfer_id"));
-        transfer.setTransferTypeId(rs.getInt("transfer_type_id"));
-        transfer.setTransferStatus(rs.getInt("transfer_status_id"));
-        transfer.setAccountFrom(rs.getInt("account_from"));
-        transfer.setAccountTo(rs.getInt("account_in"));
+        transfer.setTransfer_id(rs.getInt("transfer_id"));
+        transfer.setTransfer_type_id(rs.getInt("transfer_type_id"));
+        transfer.setTransfer_status_id(rs.getInt("transfer_status_id"));
+        transfer.setAccount_from(rs.getInt("account_from"));
+        transfer.setAccount_to(rs.getInt("account_to"));
         transfer.setAmount(rs.getBigDecimal("amount"));
         return transfer;
     }

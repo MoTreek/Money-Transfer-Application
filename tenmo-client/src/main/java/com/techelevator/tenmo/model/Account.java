@@ -3,27 +3,26 @@ package com.techelevator.tenmo.model;
 import java.math.BigDecimal;
 
 public class Account {
-    private Long accountID;
+    private int account_id;
     private BigDecimal balance;
-    private int user_ID;
+    private int user_id;
 
     public Account() {
     }
 
-    ;
 
-    public Account(Long accountID, int user_ID, BigDecimal balance) {
-        this.accountID = accountID;
+    public Account(int account_id, BigDecimal balance, int user_id) {
+        this.account_id = account_id;
         this.balance = balance;
-        this.user_ID = user_ID;
+        this.user_id = user_id;
     }
 
-    public Long getAccountID() {
-        return accountID;
+    public int getAccount_id() {
+        return account_id;
     }
 
-    public void setAccountID(Long accountID) {
-        this.accountID = accountID;
+    public void setAccount_id(int account_id) {
+        this.account_id = account_id;
     }
 
     public BigDecimal getBalance() {
@@ -34,20 +33,20 @@ public class Account {
         this.balance = balance;
     }
 
-    public int getUser_ID() {
-        return user_ID;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setUser_ID(int user_ID) {
-        this.user_ID = user_ID;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     @Override
     public String toString() {
         return "Transfer{" +
-                "id=" + accountID +
+                "id=" + account_id +
                 ", Type='" + balance + '\'' +
-                ", Status=" + user_ID + '}';
+                ", Status=" + user_id + '}';
     }
 
 }

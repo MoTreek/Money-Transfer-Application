@@ -9,8 +9,11 @@ import java.util.List;
 public interface AccountDAO {
 
     public Account getAccountByUserID(int userID);
+
+
     public List<Account> listAll();
     public Account updateAccount(Account account);
 
+    public BigDecimal getAccountBalanceByUserID(Integer user_id);
 }
 

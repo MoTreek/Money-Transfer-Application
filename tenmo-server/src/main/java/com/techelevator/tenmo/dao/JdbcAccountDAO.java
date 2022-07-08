@@ -1,11 +1,11 @@
 package com.techelevator.tenmo.dao;
 
 import com.techelevator.tenmo.model.Account;
+import com.techelevator.tenmo.model.Transfer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-import javax.security.auth.login.AccountNotFoundException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,16 +20,28 @@ public class JdbcAccountDAO implements AccountDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    //fix to make get
+    //Get account by userID
     @Override
-    public Account getAccountByUserID(int id) {
+    public Account getAccountByUserID(int userID) {
         Account account = null;
         String sql = "SELECT account_id, user_id, balance FROM account WHERE user_id = ?";
-        SqlRowSet sqlRowSet = jdbcTemplate.queryForRowSet(sql, id);
+        SqlRowSet sqlRowSet = jdbcTemplate.queryForRowSet(sql, userID);
         while (sqlRowSet.next()) {
             account = mapRowToAccount(sqlRowSet);
         }
         return account;
+    }
+
+    @Override
+    public BigDecimal getAccountBalanceByUserID(Integer user_id) {
+        String sql = "SELECT balance FROM account WHERE user_id = ?";
+        BigDecimal accountBalance = jdbcTemplate.queryForObject(sql, BigDecimal.class, user_id);
+        if (user_id != null) {
+            return accountBalance;
+        } else {
+            System.out.println("Account does not exist.");
+            return null;
+        }
     }
 
     //List account IDs associated with a given userID (Checked)
@@ -66,16 +78,18 @@ public class JdbcAccountDAO implements AccountDAO {
         Account result = account;
         String sql = "UPDATE account " +
                 "SET balance = ? WHERE account_id = ?";
-        jdbcTemplate.update(sql, account.getBalance(), account.getAccountID());
+        jdbcTemplate.update(sql, account.getBalance(), account.getAccount_id());
 
         return result;
     }
 
 
+
+
     public Account mapRowToAccount(SqlRowSet rs) {
         Account account = new Account();
-        account.setAccountID(rs.getInt("account_id"));
-        account.setUser_ID(rs.getInt("user_id"));
+        account.setAccount_id(rs.getInt("account_id"));
+        account.setUser_id(rs.getInt("user_id"));
         account.setBalance(rs.getBigDecimal("balance"));
 
         return account;

@@ -7,6 +7,7 @@ import com.techelevator.tenmo.model.Account;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import javax.security.auth.login.AccountNotFoundException;
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -22,21 +23,25 @@ public class AccountTransferController {
     }
     //ACCOUNT METHODS
 
-    //Get Account balance with accountID
+    //Get Account balance with userID (Returns balance on postman)
+    @RequestMapping(path = "/account/balance/{id}", method = RequestMethod.GET)
+    public BigDecimal getAccountBalanceByUserID(@PathVariable int id) {
+        return accountDAO.getAccountBalanceByUserID(id);
+    }
 
-    //Get Account object associated with userID
+    //Get Account object associated with userID (Returns account_id, balance and user_id on postman)
     @RequestMapping(path = "/account/{id}", method = RequestMethod.GET)
-    public Account get(@PathVariable int id) {
+    public Account getAccountByUserID(@PathVariable int id) {
         return accountDAO.getAccountByUserID(id);
     }
 
-    //List of all Accounts
+    //List of all Accounts (Returns array of account objects on postman)
     @RequestMapping(path = "/accounts", method = RequestMethod.GET)
     public List<Account> listAccounts() {
         return accountDAO.listAll();
     }
 
-    //Update Account associated with accountID
+    //Update Account associated with accountID (Not able to test successfully yet, lookup how to format a put in postman)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path ="/accounts/{id}", method = RequestMethod.PUT)
     public boolean updateAccount(@RequestBody Account account, @PathVariable int accountID) throws AccountNotFoundException {
@@ -48,6 +53,8 @@ public class AccountTransferController {
         } catch (Exception e) {}
         return success;
     }
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     //TRANSFER METHODS
 
