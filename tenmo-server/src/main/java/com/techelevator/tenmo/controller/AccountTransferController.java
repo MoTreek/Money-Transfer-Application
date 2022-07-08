@@ -28,7 +28,7 @@ public class AccountTransferController {
     //@return all balance info for a given account
     @RequestMapping(path = "/account/balance/{id}", method = RequestMethod.GET)
     public BigDecimal getAccountBalanceByUserID(@PathVariable int id) {
-        return accountDAO.getAccountBalanceByUserID(id);
+        return accountDAO.getAccountBalance(id);
     }
 
     //(Returns account_id, balance and user_id on postman)
@@ -36,7 +36,7 @@ public class AccountTransferController {
     //@return all account info for a given account
     @RequestMapping(path = "/account/{id}", method = RequestMethod.GET)
     public Account getAccountByUserID(@PathVariable int id) {
-        return accountDAO.getAccountByUserID(id);
+        return accountDAO.getAccount(id);
     }
 
     //List of all Accounts (Returns array of account objects on postman)

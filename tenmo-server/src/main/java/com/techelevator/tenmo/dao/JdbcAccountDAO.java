@@ -13,7 +13,7 @@ import java.util.List;
 @Component
 public class JdbcAccountDAO implements AccountDAO {
 
-    private  JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
     private BigDecimal balance;
 
     public JdbcAccountDAO(JdbcTemplate jdbcTemplate) {
@@ -22,57 +22,41 @@ public class JdbcAccountDAO implements AccountDAO {
 
     //Get account by userID
     @Override
-    public Account getAccountByUserID(int userID) {
+    public Account getAccount(int user_id) {
         Account account = null;
-        String sql = "SELECT account_id, user_id, balance FROM account WHERE user_id = ?";
-        SqlRowSet sqlRowSet = jdbcTemplate.queryForRowSet(sql, userID);
-        while (sqlRowSet.next()) {
-            account = mapRowToAccount(sqlRowSet);
+        String sql = "SELECT account_id, user_id, balance FROM account WHERE user_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, user_id);
+        if (results.next()) {
+            account = mapRowToAccount(results);
         }
         return account;
     }
 
-    @Override
-    public BigDecimal getAccountBalanceByUserID(Integer user_id) {
-        String sql = "SELECT balance FROM account WHERE user_id = ?";
-        BigDecimal accountBalance = jdbcTemplate.queryForObject(sql, BigDecimal.class, user_id);
-        if (user_id != null) {
-            return accountBalance;
-        } else {
-            System.out.println("Account does not exist.");
-            return null;
-        }
-    }
-
-    //List account IDs associated with a given userID (Checked)
-    //Should this be made to return a list? Couldn't one user_id have more than one account_id
-    //Have not made matching AccountTransferController method yet
-    /*@Override
-    public int getAccountIDByUserID(Integer userID) {
-        String sql = "SELECT account_id FROM account WHERE user_id ILIKE ?;";
-        Integer id = jdbcTemplate.queryForObject(sql, Integer.class, userID);
-        if (id != null) {
-            return id;
-        } else {
-            System.out.println("Account does not exist.");
-            return -1;
-        }
-    }*/
-
     //List all account IDs (Checked)
     @Override
-    public List<Account> listAll() {
+    public List<Account> getAllAccounts() {
         List<Account> accounts = new ArrayList<>();
-        String sql = "SELECT account_id,  user_id, balance FROM account";
+        String sql = "SELECT account_id,  user_id, balance FROM account;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
-            Account account = mapRowToAccount(results);
-            accounts.add(account);
+            accounts.add(mapRowToAccount(results));
         }
         return accounts;
     }
 
-    //Updates an account
+    @Override
+    public BigDecimal getAccountBalance(int user_id) {
+        Account account = null;
+        String sql = "SELECT account_id, user_id, balance FROM account WHERE user_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, user_id);
+        if (results.next()) {
+            account = mapRowToAccount(results);
+        }
+        return account.getBalance();
+    }
+
+
+    //Updates an account balance?
     @Override
     public Account updateAccount(Account account) {
         Account result = account;
@@ -82,8 +66,6 @@ public class JdbcAccountDAO implements AccountDAO {
 
         return result;
     }
-
-
 
 
     public Account mapRowToAccount(SqlRowSet rs) {

@@ -8,12 +8,12 @@ import java.util.List;
 
 public interface AccountDAO {
 
-    public Account getAccountByUserID(int userID);
+    public Account getAccount(int userID);
 
 
-    public List<Account> listAll();
+    public List<Account> getAllAccounts();
     public Account updateAccount(Account account);
 
-    public BigDecimal getAccountBalanceByUserID(Integer user_id);
+    public BigDecimal getAccountBalance(int user_id);
 }
 
