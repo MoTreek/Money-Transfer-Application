@@ -1,6 +1,7 @@
 package com.techelevator.tenmo.services;
 
 
+import com.techelevator.tenmo.model.User;
 import com.techelevator.tenmo.model.UserCredentials;
 
 import java.math.BigDecimal;
@@ -44,6 +45,12 @@ public class ConsoleService {
         System.out.println("5: Request TE bucks");
         System.out.println("0: Exit");
         System.out.println();
+    }
+
+    public void printUserMenu(User[] users) {
+        for (int i = 0; i < users.length; i++) {
+            System.out.println(users[i].getId() + " " + users[i].getUsername());
+        }
     }
 
     public UserCredentials promptForCredentials() {

@@ -1,8 +1,6 @@
 package com.techelevator.tenmo;
 
-import com.techelevator.tenmo.model.Account;
-import com.techelevator.tenmo.model.AuthenticatedUser;
-import com.techelevator.tenmo.model.UserCredentials;
+import com.techelevator.tenmo.model.*;
 import com.techelevator.tenmo.services.*;
 import io.cucumber.java.eo.Do;
 
@@ -113,10 +111,26 @@ public class App {
     }
 
     private void sendBucks() {
-        // TODO Auto-generated method stub
+        User[] users = userService.retrieveAllUsers();
+        if (users != null) {
+            consoleService.printUserMenu(users);
+            int toUserId = consoleService.promptForInt("Enter UserID of user you are sending to (0 to cancel): ");
+            if (toUserId != 0) {
+                BigDecimal amount = consoleService.promptForBigDecimal("Enter amount: ");
+                int fromUserId = currentUser.getUser().getId();
+                TransferDTO dto = new TransferDTO(fromUserId, toUserId, amount, 2);
+                Transfer transfer = transferService.createTransfer(dto);
+                if (transfer != null) {
+                    System.out.println(amount + " Dollars were sent to user " + toUserId);
+                } else {
+                    consoleService.printErrorMessage();
+                }
 
+            }
+        } else {
+            consoleService.printErrorMessage();
+        }
     }
-
     private void requestBucks() {
         // TODO Auto-generated method stub
 
