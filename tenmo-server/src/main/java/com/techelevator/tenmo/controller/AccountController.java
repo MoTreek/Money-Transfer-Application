@@ -27,7 +27,7 @@ public class AccountController {
     //@param id is user_id of the user
     //@return all balance info for a given account
     @RequestMapping(path = "/account/balance/{id}", method = RequestMethod.GET)
-    public BigDecimal getAccountBalanceByUserID(@PathVariable int id) {
+    public Double getAccountBalanceByUserID(@PathVariable int id) {
         return accountDAO.getAccountBalance(id);
     }
 

@@ -1,5 +1,6 @@
 package com.techelevator.tenmo.dao;
 
+import com.techelevator.tenmo.model.Account;
 import com.techelevator.tenmo.model.Transfer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -96,6 +97,13 @@ public class JdbcTransferDAO implements TransferDAO {
                 newTransfer.getTransfer_type_id(), newTransfer.getTransfer_status_id(), newTransfer.getAccount_from(), newTransfer.getAccount_to(), newTransfer.getAmount());
         return getTransfer(transferID);
     }
+
+//    @Override
+//    public Transfer subtractFundsFromBalance(Account account) {
+//        BigDecimal newBalance =  account.getBalance(account);
+//        newBalance -= transfers.getAmount(account);
+//
+//    }
 
 
     //Check to see if sufficient for new sql statements

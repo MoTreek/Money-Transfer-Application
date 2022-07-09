@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class Account {
     private int account_id;
-    private BigDecimal balance;
+    private Double balance;
     private int user_id;
 
     public Account() {
@@ -12,7 +12,7 @@ public class Account {
 
 
 
-    public Account(int account_id, int user_id, BigDecimal balance) {
+    public Account(int account_id, int user_id, Double balance) {
         this.account_id = account_id;
         this.user_id = user_id;
         this.balance = balance;
@@ -27,11 +27,11 @@ public class Account {
         this.account_id = account_id;
     }
 
-    public BigDecimal getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(BigDecimal balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 

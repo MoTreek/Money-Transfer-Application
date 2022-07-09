@@ -12,8 +12,9 @@ public interface AccountDAO {
 
 
     public List<Account> getAllAccounts();
+
     public Account updateAccount(Account account);
 
-    public BigDecimal getAccountBalance(int user_id);
+    public Double getAccountBalance(int user_id);
 }
 

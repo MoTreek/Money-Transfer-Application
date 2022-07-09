@@ -2,6 +2,7 @@ package com.techelevator.tenmo.services;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
 public class AuthenticatedAPIService {
@@ -16,7 +17,9 @@ public class AuthenticatedAPIService {
     }
     protected HttpEntity<Void> makeAuthEntity() {
         HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(authToken);
+
         return new HttpEntity<>(headers);
     }
 }

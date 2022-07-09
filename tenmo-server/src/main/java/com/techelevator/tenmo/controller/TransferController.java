@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//TODO
+//Set up in create transfer, set up a userObject fromUSer to the ToUser, updating the balance as well.
+//Apply conditional logic to the create method
+
 @RestController
 public class TransferController {
     private AccountDAO accountDAO;
