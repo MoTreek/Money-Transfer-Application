@@ -22,6 +22,18 @@ public class JdbcUserDao implements UserDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+
+    @Override
+    public User getUserById(Long userId) {
+        String sql = "SELECT user_id, username, password_hash FROM tenmo_user WHERE user_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        if(results.next()) {
+            return mapRowToUser(results);
+        } else {
+            throw new RuntimeException("userId "+userId+" was not found.");
+        }
+    }
+
     @Override
     public int findIdByUsername(String username) {
         String sql = "SELECT user_id FROM tenmo_user WHERE username ILIKE ?;";

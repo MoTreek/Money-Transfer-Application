@@ -91,7 +91,7 @@ public class App {
 
 	private void viewCurrentBalance() {
 		// TODO Auto-generated method stub
-        Double balance = accountService.getBalance();
+        Double balance = accountService.getBalance(currentUser);
         System.out.println(balance);
 		
 	}

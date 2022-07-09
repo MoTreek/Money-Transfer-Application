@@ -1,6 +1,7 @@
 package com.techelevator.tenmo.services;
 
 import com.techelevator.tenmo.model.Account;
+import com.techelevator.tenmo.model.AuthenticatedUser;
 import com.techelevator.tenmo.model.Transfer;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +22,12 @@ public class AccountService extends AuthenticatedAPIService{
 //        return entity;
 //    }
 
-    public Double getBalance() {
+    public Double getBalance(AuthenticatedUser currentUser) {
         Double balance = null;
+        int user_id = currentUser.getUser().getUser_id();
        try  {
 
-            ResponseEntity<Double> response = restTemplate.exchange(API_BASE_URL + "accounts", HttpMethod.GET, makeAuthEntity(), Double.class);
+            ResponseEntity<Double> response = restTemplate.exchange(API_BASE_URL + "account/balance/" + user_id, HttpMethod.GET, makeAuthEntity(), Double.class);
             balance = response.getBody();
 
         } catch(RestClientResponseException | ResourceAccessException e){

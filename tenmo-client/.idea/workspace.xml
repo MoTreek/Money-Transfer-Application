@@ -77,4 +77,20 @@
     <option featureType="dependencySupport" implementationName="java:io.cucumber:cucumber-java" />
     <option featureType="dependencySupport" implementationName="java:org.seleniumhq.selenium:selenium-java" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/techelevator/tenmo/App.java</url>
+          <line>93</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="currentUser" />
+      </configuration>
+    </watches-manager>
+  </component>
 </project>

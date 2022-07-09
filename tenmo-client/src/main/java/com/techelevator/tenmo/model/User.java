@@ -2,14 +2,14 @@ package com.techelevator.tenmo.model;
 
 public class User {
 
-    private Integer user_id;
+    private int user_id;
     private String username;
 
     public Integer getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Integer user_id) {
+    public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
 
