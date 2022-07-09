@@ -16,7 +16,7 @@ public class UserService extends AuthenticatedAPIService {
     public User[] retrieveAllUsers() {
         User[] users = null;
         try {
-            ResponseEntity<User[]> response = restTemplate.exchange(API_BASE_URL + "users", HttpMethod.GET, makeAuthEntity(), User[].class);
+            ResponseEntity<User[]> response = restTemplate.exchange(API_BASE_URL + "users/", HttpMethod.GET, makeAuthEntity(), User[].class);
             users = response.getBody();
         } catch (RestClientResponseException | ResourceAccessException e) {
             BasicLogger.log(e.getMessage());
