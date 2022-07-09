@@ -4,6 +4,7 @@ import com.techelevator.tenmo.model.Account;
 import com.techelevator.tenmo.model.AuthenticatedUser;
 import com.techelevator.tenmo.model.UserCredentials;
 import com.techelevator.tenmo.services.*;
+import io.cucumber.java.eo.Do;
 
 import java.math.BigDecimal;
 
@@ -92,6 +93,8 @@ public class App {
 	private void viewCurrentBalance() {
 		// TODO Auto-generated method stub
         Double balance = accountService.getBalance(currentUser);
+        BigDecimal returnedBalance = null;
+        returnedBalance = BigDecimal.valueOf(balance);
         System.out.println(balance);
 		
 	}
