@@ -32,6 +32,7 @@ public class App {
             mainMenu();
         }
     }
+
     private void loginMenu() {
         int menuSelection = -1;
         while (menuSelection != 0 && currentUser == null) {
@@ -90,33 +91,35 @@ public class App {
         }
     }
 
-	private void viewCurrentBalance() {
-		// TODO Auto-generated method stub
+    private void viewCurrentBalance() {
+        // TODO Auto-generated method stub
         Double balance = accountService.getBalance(currentUser);
-        BigDecimal returnedBalance = null;
-        returnedBalance = BigDecimal.valueOf(balance);
-        System.out.println(balance);
-		
-	}
+        if (balance != null) {
+            System.out.println("Your current account balance is: " + balance);
 
-	private void viewTransferHistory() {
-		// TODO Auto-generated method stub
-		
-	}
+        } else {
+            consoleService.printErrorMessage();
+        }
+    }
 
-	private void viewPendingRequests() {
-		// TODO Auto-generated method stub
-		
-	}
+    private void viewTransferHistory() {
+        // TODO Auto-generated method stub
 
-	private void sendBucks() {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	private void requestBucks() {
-		// TODO Auto-generated method stub
-		
-	}
+    private void viewPendingRequests() {
+        // TODO Auto-generated method stub
+
+    }
+
+    private void sendBucks() {
+        // TODO Auto-generated method stub
+
+    }
+
+    private void requestBucks() {
+        // TODO Auto-generated method stub
+
+    }
 
 }

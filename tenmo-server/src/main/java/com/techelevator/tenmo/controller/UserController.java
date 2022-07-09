@@ -28,4 +28,6 @@ public class UserController {
     public int findIdByUserName(@PathVariable String username) {
         return userdao.findIdByUsername(username);
     }
+
+
 }
