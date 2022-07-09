@@ -26,8 +26,9 @@ public class AccountController {
     //(Returns balance on postman)
     //@param id is user_id of the user
     //@return all balance info for a given account
-    @RequestMapping(path = "/account/balance/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = "account/balance/{id}", method = RequestMethod.GET)
     public Double getAccountBalanceByUserID(@PathVariable int id) {
+        System.out.println("controller id received " + id);
         return accountDAO.getAccountBalance(id);
     }
 

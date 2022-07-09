@@ -1,7 +1,6 @@
 package com.techelevator.tenmo.dao;
 
 import com.techelevator.tenmo.model.Account;
-import com.techelevator.tenmo.model.Transfer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -46,13 +45,14 @@ public class JdbcAccountDAO implements AccountDAO {
 
     @Override
     public Double getAccountBalance(int user_id) {
-        Account account = null;
-        String sql = "SELECT account_id, user_id, balance FROM account WHERE user_id = ?;";
+        System.out.println("user id ? " + user_id);
+        double balance = 0;
+        String sql = "SELECT balance FROM account WHERE user_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, user_id);
         if (results.next()) {
-            account = mapRowToAccount(results);
+            balance = results.getDouble("balance");
         }
-        return account.getBalance();
+        return balance;
     }
 
 
