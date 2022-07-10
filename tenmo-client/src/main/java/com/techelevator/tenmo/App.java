@@ -103,21 +103,21 @@ public class App {
     private void viewTransferHistory() {
         Account account = accountService.getAccount(currentUser);
         Transfer[] transfers;
-                transfers = transferService.listTransfersByAccount(account);
-                for (int i = 0; i < transfers.length; i++){
-                    if(transfers[i].getTransfer_status_id() > 1) {
-                        System.out.println(transfers + "\n");
-                    }
-                }
+        transfers = transferService.listTransfersByAccount(account);
+        for (int i = 0; i < transfers.length; i++){
+            if(transfers[i].getTransfer_status_id() > 1) {
+                System.out.println(transfers[i].toString());
+            }
+        }
     }
 
     private void viewPendingRequests() {
         Account account = accountService.getAccount(currentUser);
-        Transfer[] transfers;
-        transfers = transferService.listTransfersByAccount(account);
-        for (int i = 0; i < transfers.length; i++){
-            if(transfers[i].getTransfer_status_id() == 1) {
-                System.out.println(transfers + "\n");
+        Transfer[] transfersList;
+        transfersList = transferService.listTransfersByAccount(account);
+        for (int i = 0; i < transfersList.length; i++){
+            if(transfersList[i].getTransfer_status_id() == 1) {
+                System.out.println(transfersList[i].toString());
             }
         }
     }
