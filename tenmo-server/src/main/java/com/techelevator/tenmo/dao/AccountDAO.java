@@ -13,6 +13,8 @@ public interface AccountDAO {
 
     public List<Account> getAllAccounts();
 
+    Integer getAccountId(int user_id);
+
     public Account updateAccount(Account account);
 
     public Double getAccountBalance(int user_id);

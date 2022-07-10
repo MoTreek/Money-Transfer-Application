@@ -55,13 +55,13 @@ public class JdbcTransferDAO implements TransferDAO {
     //Do not use the query for object use query for Rowset
     @Override
     public Transfer getTransfer(Integer transferID) {
-        String sql = "SELECT  transfer.account_from," +
-                "        transfer.account_to," +
-                "        transfer.amount," +
-                "        transfer.transfer_id," +
-                "        transfer.transfer_status_id," +
-                "        transfer.transfer_type_id" +
-                "FROM transfer" +
+        String sql = "SELECT  transfer.account_from, " +
+                "        transfer.account_to, " +
+                "        transfer.amount, " +
+                "        transfer.transfer_id, " +
+                "        transfer.transfer_status_id, " +
+                "        transfer.transfer_type_id " +
+                "FROM transfer " +
                 "WHERE transfer.transfer_id = ?;";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, transferID);
         Transfer newTransfer = null;

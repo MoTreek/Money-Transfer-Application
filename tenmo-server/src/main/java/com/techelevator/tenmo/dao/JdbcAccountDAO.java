@@ -55,6 +55,17 @@ public class JdbcAccountDAO implements AccountDAO {
         return balance;
     }
 
+    @Override
+    public Integer getAccountId(int user_id) {
+        Integer accountId = 0;
+        String sql = "SELECT account_id FROM account WHERE user_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, user_id);
+        if (results.next()) {
+            accountId = results.getInt("account_id");
+        }
+        return accountId;
+    }
+
 
     //Updates an account balance?
     @Override

@@ -41,6 +41,21 @@ public class AccountService extends AuthenticatedAPIService{
         return account;
     }
 
+    public Integer getAccountId(AuthenticatedUser currentUser) {
+        Integer accountId = 0;
+        int user_id = currentUser.getUser().getId();
+        try  {
+            ResponseEntity<Integer> response = restTemplate.exchange(API_BASE_URL + "accounts/" + user_id, HttpMethod.GET, makeAuthEntity(), Integer.class);
+            accountId = response.getBody();
+
+        } catch(RestClientResponseException | ResourceAccessException e){
+            System.out.println(e.getCause());
+            System.out.println(e.getMessage());
+
+        }
+        return accountId;
+    }
+
 
 }
 

@@ -31,6 +31,12 @@ public class AccountController {
         System.out.println("controller id received " + id);
         return accountDAO.getAccountBalance(id);
     }
+    //Salutations Garrett! It's me Mo. Just Chilling and trying to come up with a way to grab the account id to use in the client side.
+    //Keep on trucking on my guy.
+    @RequestMapping(path = "accounts/{id}", method = RequestMethod.GET)
+    public Integer getAccountIDByUserID(@PathVariable int id) {
+        return accountDAO.getAccountId(id);
+    }
 
     //(Returns account_id, balance and user_id on postman)
     //@param id is user_id of the user
@@ -59,6 +65,8 @@ public class AccountController {
         } catch (Exception e) {}
         return success;
     }
+
+
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

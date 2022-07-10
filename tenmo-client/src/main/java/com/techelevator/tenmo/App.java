@@ -2,6 +2,7 @@ package com.techelevator.tenmo;
 
 import com.techelevator.tenmo.model.*;
 import com.techelevator.tenmo.services.*;
+import io.cucumber.java.cy_gb.A;
 import io.cucumber.java.eo.Do;
 
 import java.math.BigDecimal;
@@ -100,13 +101,25 @@ public class App {
     }
 
     private void viewTransferHistory() {
-        // TODO Auto-generated method stub
-
+        Account account = accountService.getAccount(currentUser);
+        Transfer[] transfers;
+                transfers = transferService.listTransfersByAccount(account);
+                for (int i = 0; i < transfers.length; i++){
+                    if(transfers[i].getTransfer_status_id() > 1) {
+                        System.out.println(transfers + "\n");
+                    }
+                }
     }
 
     private void viewPendingRequests() {
-        // TODO Auto-generated method stub
-
+        Account account = accountService.getAccount(currentUser);
+        Transfer[] transfers;
+        transfers = transferService.listTransfersByAccount(account);
+        for (int i = 0; i < transfers.length; i++){
+            if(transfers[i].getTransfer_status_id() == 1) {
+                System.out.println(transfers + "\n");
+            }
+        }
     }
 
     private void sendBucks() {
