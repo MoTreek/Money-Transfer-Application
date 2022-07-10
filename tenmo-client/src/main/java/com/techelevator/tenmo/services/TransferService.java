@@ -6,7 +6,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
-
 public class TransferService extends AuthenticatedAPIService {
 
 
@@ -23,13 +22,14 @@ public class TransferService extends AuthenticatedAPIService {
         Transfer transfer = null;
         try {
             ResponseEntity<Transfer> response =
-                    restTemplate.exchange(API_BASE_URL, HttpMethod.POST, makeTransferDtoEntity(dto), Transfer.class);
+                    restTemplate.exchange(API_BASE_URL, HttpMethod.GET, makeTransferDtoEntity(dto), Transfer.class);
             transfer = response.getBody();
         } catch (RestClientResponseException | ResourceAccessException e) {
             BasicLogger.log(e.getMessage());
         }
         return transfer;
     }
+
 
     public Transfer[] listTransfersByAccount(Account accountID) {
         Integer account_id = accountID.getAccount_id();
@@ -45,9 +45,7 @@ public class TransferService extends AuthenticatedAPIService {
     }
 }
 
-    /*private Object makeTransferDtoEntity(TransferDTO dto) {
-    }
-}*/
+
 
 
 

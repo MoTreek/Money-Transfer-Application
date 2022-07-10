@@ -26,10 +26,11 @@ public class AuthenticatedAPIService {
 
 
     //Make a post HTTP entity that uses Transfer DTO dto as a parameter
-    protected HttpEntity<Void> makeTransferDtoEntity(TransferDTO dto) {
+
+    public HttpEntity<TransferDTO> makeTransferDtoEntity(TransferDTO dto) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(authToken);
-        return new HttpEntity<>(headers);
+        return new HttpEntity<>(dto, headers);
     }
 }

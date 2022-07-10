@@ -12,3 +12,13 @@
 2022-07-09T21:32:34.4890947 I/O error on POST request for "http://localhost:8080/login": Connection refused: connect; nested exception is java.net.ConnectException: Connection refused: connect
 2022-07-09T21:33:24.0827542 I/O error on POST request for "http://localhost:8080/login": Connection refused: connect; nested exception is java.net.ConnectException: Connection refused: connect
 2022-07-09T21:34:07.2874563 I/O error on POST request for "http://localhost:8080/login": Connection refused: connect; nested exception is java.net.ConnectException: Connection refused: connect
+2022-07-09T22:50:42.1455961 I/O error on POST request for "http://localhost:8080/login": Connection refused: connect; nested exception is java.net.ConnectException: Connection refused: connect
+2022-07-09T22:54:59.9545713 404 : [{"timestamp":"2022-07-10T02:54:59.926+00:00","status":404,"error":"Not Found","message":"No message available","path":"/"}]
+2022-07-09T23:10:49.2365215 401 : [no body]
+2022-07-09T23:11:01.2607396 404 : [{"timestamp":"2022-07-10T03:11:01.256+00:00","status":404,"error":"Not Found","message":"No message available","path":"/"}]
+2022-07-09T23:13:20.2376507 404 : [{"timestamp":"2022-07-10T03:13:20.222+00:00","status":404,"error":"Not Found","message":"No message available","path":"/"}]
+2022-07-09T23:15:40.2524578 404 : [{"timestamp":"2022-07-10T03:15:40.185+00:00","status":404,"error":"Not Found","message":"No message available","path":"/"}]
+2022-07-09T23:40:36.2323716 404 : [{"timestamp":"2022-07-10T03:40:36.217+00:00","status":404,"error":"Not Found","message":"No message available","path":"/"}]
+2022-07-09T23:41:34.9538108 404 : [{"timestamp":"2022-07-10T03:41:34.885+00:00","status":404,"error":"Not Found","message":"No message available","path":"/"}]
+2022-07-09T23:45:03.178136 404 : [{"timestamp":"2022-07-10T03:45:03.156+00:00","status":404,"error":"Not Found","message":"No message available","path":"/"}]
+2022-07-09T23:53:02.1425669 404 : [{"timestamp":"2022-07-10T03:53:02.124+00:00","status":404,"error":"Not Found","message":"No message available","path":"/"}]

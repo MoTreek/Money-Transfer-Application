@@ -1,5 +1,7 @@
 package com.techelevator.tenmo.model;
 
+import java.net.Authenticator;
+
 public class TransferType {
     private int transfer_type_id;
     private String transfer_type_desc;
