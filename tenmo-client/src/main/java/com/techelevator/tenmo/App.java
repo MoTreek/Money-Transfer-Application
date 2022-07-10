@@ -90,7 +90,6 @@ public class App {
     }
 
     private void viewCurrentBalance() {
-        // TODO Auto-generated method stub
         Double balance = accountService.getBalance(currentUser);
         if (balance != null) {
             System.out.println("Your current account balance is: " + balance);
@@ -121,19 +120,34 @@ public class App {
                 TransferDTO dto = new TransferDTO(fromUserId, toUserId, amount, 2);
                 Transfer transfer = transferService.createTransfer(dto);
                 if (transfer != null) {
-                    System.out.println(amount + " Dollars were sent to user " + toUserId);
+                    System.out.println(amount + " dollars were sent to user " + toUserId);
                 } else {
                     consoleService.printErrorMessage();
                 }
-
             }
         } else {
             consoleService.printErrorMessage();
         }
     }
+
     private void requestBucks() {
-        // TODO Auto-generated method stub
-
+        User[] users = userService.retrieveAllUsers();
+        if (users != null) {
+            consoleService.printUserMenu(users);
+            int fromUserId = consoleService.promptForInt("Enter ID of user you are requesting from (0 to cancel): ");
+            BigDecimal amount = consoleService.promptForBigDecimal("Enter amount: ");
+            consoleService.printUserMenu(users);
+            int toUserId = currentUser.getUser().getId();
+            //Double check line below
+            TransferDTO dto = new TransferDTO(fromUserId, toUserId, amount, 1);
+            Transfer transfer = transferService.createTransfer(dto);
+            if (transfer != null) {
+                System.out.println(amount + " dollars were requested from user " + toUserId);
+            } else {
+                consoleService.printErrorMessage();
+            }
+        } else {
+            consoleService.printErrorMessage();
+        }
     }
-
 }
