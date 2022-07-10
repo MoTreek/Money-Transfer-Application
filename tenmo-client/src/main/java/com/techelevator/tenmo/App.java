@@ -145,6 +145,8 @@ public class App {
         }
     }
 
+
+    
     private void requestBucks() {
         User[] users = userService.retrieveAllUsers();
         if (users != null) {
