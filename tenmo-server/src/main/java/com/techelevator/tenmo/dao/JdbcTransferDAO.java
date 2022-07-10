@@ -13,6 +13,7 @@ import java.util.List;
 @Component
 public class JdbcTransferDAO implements TransferDAO {
 
+
     //View pending transfer and status
 
     //TODO
@@ -98,12 +99,44 @@ public class JdbcTransferDAO implements TransferDAO {
         return getTransfer(transferID);
     }
 
-//    @Override
-//    public Transfer subtractFundsFromBalance(Account account) {
-//        BigDecimal newBalance =  account.getBalance(account);
-//        newBalance -= transfers.getAmount(account);
-//
-//    }
+    @Override
+    public Double subtractFundsFromBalance(Account account) {
+        Double balance = account.getBalance();
+        BigDecimal amount = transfers.getAmount();
+        balance = balance - amount.doubleValue();
+        account.setBalance(balance);
+        return balance;
+    }
+    @Override
+    public Double addFundsToBalance(Account account) {
+        Double balance = account.getBalance();
+        BigDecimal amount = transfers.getAmount();
+        balance = balance - amount.doubleValue();
+        account.setBalance(balance);
+        return balance;
+    }
+
+    @Override
+    public Integer getFromAccountId(int user_id) {
+        Integer accountId = 0;
+        String sql = "SELECT account_from FROM transfer WHERE transfer = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, accountId);
+        if (results.next()) {
+            accountId = results.getInt("account_from");
+        }
+        return accountId;
+    }
+
+    @Override
+    public Integer getToAccountId(int user_id) {
+        Integer accountId = 0;
+        String sql = "SELECT account_to FROM transfer WHERE transfer = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, accountId);
+        if (results.next()) {
+            accountId = results.getInt("account_to");
+        }
+        return accountId;
+    }
 
 
     //Check to see if sufficient for new sql statements

@@ -27,6 +27,6 @@ public class TransferType {
 
     @Override
     public String toString() {
-        return "TransferType{" + "transfer_type_id =" + transfer_type_id + ", transfer_type_desc ='" + transfer_type_desc + '}';
+        return "TransferType{\n" + "transfer_type_id =" + transfer_type_id + ", transfer_type_desc =" + transfer_type_desc + "}";
     }
 }

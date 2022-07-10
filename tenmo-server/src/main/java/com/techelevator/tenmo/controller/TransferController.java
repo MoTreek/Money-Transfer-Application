@@ -3,6 +3,7 @@ package com.techelevator.tenmo.controller;
 import com.techelevator.tenmo.dao.AccountDAO;
 import com.techelevator.tenmo.dao.TransferDAO;
 import com.techelevator.tenmo.dao.UserDao;
+import com.techelevator.tenmo.model.Account;
 import com.techelevator.tenmo.model.Transfer;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,9 +54,18 @@ public class TransferController {
     @RequestMapping(path = "/transfers/", method = RequestMethod.POST)
     public Transfer createTransfer(@RequestBody Transfer transfer) {
         Transfer newTransfer = transferDAO.createTransfer(transfer);
-        transferDAO.subtractFundsFromBalance(newTransfer);
-        transferDAO.addFundsToBalance(newTransfer);
+        //transferDAO.subtractFundsFromBalance(transferDAO.get);
+        //transferDAO.addFundsToBalance(newTransfer);
         return newTransfer;
+    }
+    @RequestMapping(path = "transfer/{id}/account_from", method = RequestMethod.GET)
+    public Integer getAccountFromByTransferID(@PathVariable int id) {
+        transferDAO.subtractFundsFromBalance()
+        return transferDAO.getFromAccountId(id);
+    }
+    @RequestMapping(path = "transfer/{id}/account_to", method = RequestMethod.GET)
+    public Integer getAccountToByTransferID(@PathVariable int id) {
+        return transferDAO.getFromAccountId(id);
     }
 
 

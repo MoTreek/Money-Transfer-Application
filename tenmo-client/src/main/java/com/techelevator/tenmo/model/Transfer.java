@@ -80,14 +80,36 @@ public class Transfer {
 
     @Override
     public String toString() {
-        return "Transfer{" +
-                "id=" + transfer_id +
-                ", Type='" + transfer_type_id + '\'' +
-                ", Status=" + transfer_status_id +
-                ", Account From=" + account_from +
-                ", Account To=" + account_to +
-                ", Amount=" + amount +
-                '}';
+        String transferStatusText = "";
+        String transferTypeText = "";
+        if (transfer_status_id > 0) {
+            if (transfer_status_id == 1) {
+                transferStatusText = "Pending";
+            }
+            if (transfer_status_id == 2) {
+                transferStatusText = "Approved";
+            }
+            if (transfer_status_id == 3) {
+                transferStatusText = "Rejected";
+            }
+        }
+        if (transfer_type_id > 0){
+            if (transfer_type_id == 1) {
+                transferTypeText = "Request";
+            }
+            if (transfer_type_id == 2) {
+                transferTypeText = "Send";
+            }
+        }
+
+
+        return "Transfers" +
+                "id = " + transfer_id + "\n"+
+                " Type = " + transferTypeText + "\n" +
+                " Status = " + transferStatusText + "\n" +
+                " Account From = " + account_from + "\n" +
+                " Account To = " + account_to + "\n" +
+                " Amount = " + amount;
     }
 
 }

@@ -5,3 +5,5 @@
 2022-07-10T12:25:48.5930835 404 : [{"timestamp":"2022-07-10T16:25:48.375+00:00","status":404,"error":"Not Found","message":"No message available","path":"/"}]
 2022-07-10T12:31:13.7764772 404 : [{"timestamp":"2022-07-10T16:31:13.664+00:00","status":404,"error":"Not Found","message":"No message available","path":"/"}]
 2022-07-10T12:34:22.4808886 500 : [{"timestamp":"2022-07-10T16:34:22.327+00:00","status":500,"error":"Internal Server Error","message":"PreparedStatementCallback; SQL [INSERT INTO transfer (transfer_type_id, transfer_status_id, account... (715 bytes)]
+2022-07-10T14:05:11.626341 401 : [no body]
+2022-07-10T14:05:42.6461825 I/O error on POST request for "http://localhost:8080/login": Connection refused: connect; nested exception is java.net.ConnectException: Connection refused: connect
