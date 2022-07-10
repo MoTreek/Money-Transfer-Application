@@ -53,7 +53,8 @@ public class TransferController {
     @RequestMapping(path = "/transfers/", method = RequestMethod.POST)
     public Transfer createTransfer(@RequestBody Transfer transfer) {
         Transfer newTransfer = transferDAO.createTransfer(transfer);
-        transferDAO.updateBalance(newTransfer)
+        transferDAO.subtractFundsFromBalance(newTransfer);
+        transferDAO.addFundsToBalance(newTransfer);
         return newTransfer;
     }
 

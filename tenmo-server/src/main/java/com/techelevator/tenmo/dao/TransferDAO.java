@@ -10,6 +10,8 @@ public interface TransferDAO {
     Transfer getTransfer(Integer transferID);
     Transfer updateTransferStatusID(Transfer transfer);
     Transfer createTransfer(Transfer newTransfer);
-//   Transfer subtractFundsFromBalance(Transfer transfer);
-    Transfer updateBalance(Transfer transfer);
+
+    //Create methods for the below two in JdbcTransferDao
+    Transfer subtractFundsFromBalance(Transfer transfer);
+    Transfer addFundsToBalance(Transfer transfer);
 }
