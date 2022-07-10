@@ -10,5 +10,6 @@ public interface TransferDAO {
     Transfer getTransfer(Integer transferID);
     Transfer updateTransferStatusID(Transfer transfer);
     Transfer createTransfer(Transfer newTransfer);
-//    Transfer subtractFundsFromBalance(Transfer transfer);
+//   Transfer subtractFundsFromBalance(Transfer transfer);
+    Transfer updateBalance(Transfer transfer);
 }

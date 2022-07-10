@@ -22,7 +22,7 @@ public class TransferService extends AuthenticatedAPIService {
         Transfer transfer = null;
         try {
             ResponseEntity<Transfer> response =
-                    restTemplate.exchange(API_BASE_URL, HttpMethod.POST, makeTransferEntity(newTransfer), Transfer.class);
+                    restTemplate.exchange(API_BASE_URL + "transfers/", HttpMethod.POST, makeTransferEntity(newTransfer), Transfer.class);
             transfer = response.getBody();
         } catch (RestClientResponseException | ResourceAccessException e) {
             BasicLogger.log(e.getMessage());

@@ -52,7 +52,9 @@ public class TransferController {
 
     @RequestMapping(path = "/transfers/", method = RequestMethod.POST)
     public Transfer createTransfer(@RequestBody Transfer transfer) {
-        return transferDAO.createTransfer(transfer);
+        Transfer newTransfer = transferDAO.createTransfer(transfer);
+        transferDAO.updateBalance(newTransfer)
+        return newTransfer;
     }
 
 

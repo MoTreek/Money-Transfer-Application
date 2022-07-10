@@ -2,3 +2,6 @@
 2022-07-10T00:42:50.9950416 404 : [{"timestamp":"2022-07-10T04:42:50.979+00:00","status":404,"error":"Not Found","message":"No message available","path":"/"}]
 2022-07-10T00:49:46.1833292 404 : [{"timestamp":"2022-07-10T04:49:46.160+00:00","status":404,"error":"Not Found","message":"No message available","path":"/"}]
 2022-07-10T01:12:10.0427328 404 : [{"timestamp":"2022-07-10T05:12:10.020+00:00","status":404,"error":"Not Found","message":"No message available","path":"/"}]
+2022-07-10T12:25:48.5930835 404 : [{"timestamp":"2022-07-10T16:25:48.375+00:00","status":404,"error":"Not Found","message":"No message available","path":"/"}]
+2022-07-10T12:31:13.7764772 404 : [{"timestamp":"2022-07-10T16:31:13.664+00:00","status":404,"error":"Not Found","message":"No message available","path":"/"}]
+2022-07-10T12:34:22.4808886 500 : [{"timestamp":"2022-07-10T16:34:22.327+00:00","status":500,"error":"Internal Server Error","message":"PreparedStatementCallback; SQL [INSERT INTO transfer (transfer_type_id, transfer_status_id, account... (715 bytes)]
