@@ -18,11 +18,11 @@ public class TransferService extends AuthenticatedAPIService {
         return transfer;
     }*/
 
-    public Transfer createTransfer(TransferDTO dto) {
+    public Transfer createTransfer(Transfer newTransfer) {
         Transfer transfer = null;
         try {
             ResponseEntity<Transfer> response =
-                    restTemplate.exchange(API_BASE_URL, HttpMethod.GET, makeTransferDtoEntity(dto), Transfer.class);
+                    restTemplate.exchange(API_BASE_URL, HttpMethod.POST, makeTransferEntity(newTransfer), Transfer.class);
             transfer = response.getBody();
         } catch (RestClientResponseException | ResourceAccessException e) {
             BasicLogger.log(e.getMessage());

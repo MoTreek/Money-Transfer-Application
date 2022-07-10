@@ -1,5 +1,6 @@
 package com.techelevator.tenmo.services;
 
+import com.techelevator.tenmo.model.Transfer;
 import com.techelevator.tenmo.model.TransferDTO;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -27,10 +28,10 @@ public class AuthenticatedAPIService {
 
     //Make a post HTTP entity that uses Transfer DTO dto as a parameter
 
-    public HttpEntity<TransferDTO> makeTransferDtoEntity(TransferDTO dto) {
+    public HttpEntity<Transfer> makeTransferEntity(Transfer newTransfer) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(authToken);
-        return new HttpEntity<>(dto, headers);
+        return new HttpEntity<>(newTransfer, headers);
     }
 }

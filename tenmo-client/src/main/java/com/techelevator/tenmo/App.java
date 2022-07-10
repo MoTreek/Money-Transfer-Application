@@ -130,8 +130,8 @@ public class App {
             if (toUserId != 0) {
                 BigDecimal amount = consoleService.promptForBigDecimal("Enter amount: ");
                 int fromUserId = currentUser.getUser().getId();
-                TransferDTO dto = new TransferDTO(fromUserId, toUserId, amount, 2);
-                Transfer transfer = transferService.createTransfer(dto);
+                Transfer newTransfer = new Transfer(2, 2, fromUserId, toUserId,amount);
+                Transfer transfer = transferService.createTransfer(newTransfer);
                 if (transfer != null) {
                     System.out.println(amount + " dollars were sent to user " + toUserId);
                 } else {
@@ -152,8 +152,8 @@ public class App {
             consoleService.printUserMenu(users);
             int toUserId = currentUser.getUser().getId();
             //Double check line below
-            TransferDTO dto = new TransferDTO(fromUserId, toUserId, amount, 1);
-            Transfer transfer = transferService.createTransfer(dto);
+            Transfer newTransfer = new Transfer(2, 2, fromUserId, toUserId,amount);
+            Transfer transfer = transferService.createTransfer(newTransfer);
             if (transfer != null) {
                 System.out.println(amount + " dollars were requested from user " + toUserId);
             } else {

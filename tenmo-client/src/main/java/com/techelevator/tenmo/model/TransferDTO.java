@@ -11,11 +11,12 @@ public class TransferDTO {
     public int transferStatusId;
 
 
-    public TransferDTO(int fromUserId, int toUserId, BigDecimal amount, int transferTypeId) {
+    public TransferDTO(int fromUserId, int toUserId, BigDecimal amount, int transferTypeId, int transferStatusId) {
         this.fromUserId = fromUserId;
         this.toUserId = toUserId;
         this.amount = amount;
         this.transferTypeId = transferTypeId;
+        this.transferStatusId = transferStatusId;
     }
 
     public TransferDTO(int fromUserId, int toUserId, BigDecimal amount, int transferTypeId, int transferId, int transferStatusId) {
