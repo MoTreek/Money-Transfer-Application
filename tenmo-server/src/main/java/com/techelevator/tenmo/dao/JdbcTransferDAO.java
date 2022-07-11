@@ -96,6 +96,16 @@ public class JdbcTransferDAO implements TransferDAO {
         String sql = "INSERT INTO transfer (transfer_type_id, transfer_status_id, account_from, account_to, amount) VALUES (?, ?, (SELECT account_id FROM account WHERE user_id = ?), (SELECT account_id FROM account WHERE user_id = ?), ?) RETURNING transfer_id;";
         Integer transferID = jdbcTemplate.queryForObject(sql, Integer.class,
                 newTransfer.getTransfer_type_id(), newTransfer.getTransfer_status_id(), newTransfer.getAccount_from(), newTransfer.getAccount_to(), newTransfer.getAmount());
+
+//        String addingFundsToAccount = "UPDATE account " +
+//                "SET balance = balance + ? WHERE account_id = ?";
+//        jdbcTemplate.update(addingFundsToAccount, transfers.getAmount(), transfers.getAccount_to());
+//
+//        String subtractingFundsToAccount = "UPDATE account " +
+//                "SET balance = balance - ? WHERE account_id = ?";
+//        jdbcTemplate.update(addingFundsToAccount, transfers.getAmount(), transfers.getAccount_to());
+
+
         return getTransfer(transferID);
     }
 

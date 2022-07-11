@@ -60,7 +60,7 @@ public class TransferController {
     }
     @RequestMapping(path = "transfer/{id}/account_from", method = RequestMethod.GET)
     public Integer getAccountFromByTransferID(@PathVariable int id) {
-        transferDAO.subtractFundsFromBalance()
+//        transferDAO.subtractFundsFromBalance();
         return transferDAO.getFromAccountId(id);
     }
     @RequestMapping(path = "transfer/{id}/account_to", method = RequestMethod.GET)
